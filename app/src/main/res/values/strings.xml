@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">PreferencesDataStore</string>
+    <string name="preferences_datastore">Preferences DataStore</string>
+    <string name="show_completed_tasks">Show completed tasks</string>
+    <string name="pririoty">Pririoty</string>
+    <string name="deadline">Deadline</string>
 </resources>
