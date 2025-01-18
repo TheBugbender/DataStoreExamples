@@ -1,27 +1,31 @@
 package com.bugbender.preferencesdatastore.ui
 
+import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.BottomAppBar
-import androidx.compose.material3.CenterAlignedTopAppBar
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.stringResource
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.Dp
-import com.bugbender.preferencesdatastore.R
-import com.bugbender.preferencesdatastore.ui.components.AppBottomBar
-import com.bugbender.preferencesdatastore.ui.components.AppTopBar
+import androidx.datastore.core.DataStore
+import androidx.datastore.dataStore
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.bugbender.preferencesdatastore.data.TasksRepository
+import com.bugbender.preferencesdatastore.data.UserPreferencesRepository
+import com.bugbender.preferencesdatastore.data.UserPreferencesSerializer
+import com.bugbender.preferencesdatastore.proto.UserPreferences
 import com.bugbender.preferencesdatastore.ui.theme.PreferencesDataStoreTheme
+
+
+private const val DATA_STORE_FILE_NAME = "user_preferences.pb"
+
+private val Context.userPreferencesStore: DataStore<UserPreferences> by dataStore(
+    fileName = DATA_STORE_FILE_NAME,
+    serializer = UserPreferencesSerializer
+)
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,21 +41,22 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun AppScreen() {
-    Scaffold(
-        topBar = {
-            AppTopBar()
-        },
-        content = { paddingValues ->
-
-        },
-        bottomBar = {
-            AppBottomBar(
-                onShowCompletedTaskChange = {},
-                onPriorityClicked = {},
-                onDeadlineClicked = {},
+    val context = LocalContext.current
+    val viewModel: TasksViewModel = viewModel(
+        factory = TasksViewModel.Factory(
+            taskRepository = TasksRepository,
+            userPreferencesRepository = UserPreferencesRepository(
+                dataStore = context.userPreferencesStore
             )
-        },
-        modifier = Modifier.fillMaxSize()
+        )
+    )
+    val state by viewModel.screenStateFlow.collectAsStateWithLifecycle()
+
+    AppContent(
+        screenState = state,
+        onShowCompletedTaskChange = viewModel::showCompletedTasks,
+        onPriorityClicked = viewModel::enableSortByPriority,
+        onDeadlineClicked = viewModel::enableSortByDeadline
     )
 }
 
