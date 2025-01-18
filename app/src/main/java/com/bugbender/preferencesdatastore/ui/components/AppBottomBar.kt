@@ -29,10 +29,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.bugbender.preferencesdatastore.R
+import com.bugbender.preferencesdatastore.data.SortOrder
 import com.bugbender.preferencesdatastore.ui.theme.PreferencesDataStoreTheme
 
 @Composable
 fun AppBottomBar(
+    showCompletedTasks: Boolean,
+    sortOrder: SortOrder,
     onShowCompletedTaskChange: (Boolean) -> Unit,
     onPriorityClicked: (Boolean) -> Unit,
     onDeadlineClicked: (Boolean) -> Unit,
@@ -43,8 +46,15 @@ fun AppBottomBar(
             .background(MaterialTheme.colorScheme.surfaceContainer)
             .windowInsetsPadding(BottomAppBarDefaults.windowInsets)
     ) {
-        ShowCompletedTasks(onShowCompletedTaskChange = onShowCompletedTaskChange)
-        TaskFilters(onPriorityClicked = onPriorityClicked, onDeadlineClicked = onDeadlineClicked)
+        ShowCompletedTasks(
+            checked = showCompletedTasks,
+            onShowCompletedTaskChange = onShowCompletedTaskChange
+        )
+        TaskFilters(
+            sortOrder = sortOrder,
+            onPriorityClicked = onPriorityClicked,
+            onDeadlineClicked = onDeadlineClicked
+        )
     }
 }
 
@@ -52,14 +62,15 @@ fun AppBottomBar(
 @Composable
 private fun AppBottomBarPreview() {
     PreferencesDataStoreTheme {
-        AppBottomBar({}, {}, {})
+        AppBottomBar(true, SortOrder.BY_PRIORITY, {}, {}, {})
     }
 }
 
 @Composable
-fun ShowCompletedTasks(onShowCompletedTaskChange: (Boolean) -> Unit) {
-    var checked by rememberSaveable { mutableStateOf(false) }
-
+fun ShowCompletedTasks(
+    checked: Boolean,
+    onShowCompletedTaskChange: (Boolean) -> Unit
+) {
     Row(
         verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(8.dp)
     ) {
@@ -69,10 +80,7 @@ fun ShowCompletedTasks(onShowCompletedTaskChange: (Boolean) -> Unit) {
             style = MaterialTheme.typography.titleLarge,
             modifier = Modifier.padding(horizontal = 16.dp)
         )
-        Switch(checked = checked, onCheckedChange = {
-            checked = it
-            onShowCompletedTaskChange(it)
-        })
+        Switch(checked = checked, onCheckedChange = onShowCompletedTaskChange)
     }
 }
 
@@ -80,26 +88,35 @@ fun ShowCompletedTasks(onShowCompletedTaskChange: (Boolean) -> Unit) {
 @Composable
 private fun ShowCompletedTasksPreview() {
     PreferencesDataStoreTheme {
-        ShowCompletedTasks(onShowCompletedTaskChange = {})
+        ShowCompletedTasks(true, onShowCompletedTaskChange = {})
     }
 }
 
 @Composable
 fun TaskFilters(
+    sortOrder: SortOrder,
     onPriorityClicked: (Boolean) -> Unit,
     onDeadlineClicked: (Boolean) -> Unit,
 ) {
+    val (prioritySelected, deadlineSelected) = when (sortOrder) {
+        SortOrder.BY_PRIORITY -> Pair(true, false)
+        SortOrder.BY_DEADLINE -> Pair(false, true)
+        SortOrder.BY_DEADLINE_AND_PRIORITY -> Pair(true, true)
+        SortOrder.NONE -> Pair(false, false)
+    }
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier.padding(8.dp)
     ) {
         Icon(imageVector = Icons.Default.Menu, contentDescription = null)
         TaskFilterChip(
+            selected = prioritySelected,
             onClicked = onPriorityClicked,
             label = stringResource(R.string.pririoty),
             modifier = Modifier.padding(horizontal = 16.dp)
         )
         TaskFilterChip(
+            selected = deadlineSelected,
             onClicked = onDeadlineClicked,
             label = stringResource(R.string.deadline)
         )
@@ -110,19 +127,19 @@ fun TaskFilters(
 @Composable
 private fun TaskFiltersPreview() {
     PreferencesDataStoreTheme {
-        TaskFilters({}, {})
+        TaskFilters(SortOrder.BY_PRIORITY, {}, {})
     }
 }
 
 @Composable
-fun TaskFilterChip(onClicked: (Boolean) -> Unit, label: String, modifier: Modifier = Modifier) {
-    var selected by rememberSaveable { mutableStateOf(false) }
-
+fun TaskFilterChip(
+    selected: Boolean,
+    onClicked: (Boolean) -> Unit,
+    label: String,
+    modifier: Modifier = Modifier
+) {
     FilterChip(
-        onClick = {
-            selected = !selected
-            onClicked(selected)
-        },
+        onClick = { onClicked(!selected) },
         selected = selected,
         label = { Text(label) },
         leadingIcon = if (selected) {
@@ -141,6 +158,6 @@ fun TaskFilterChip(onClicked: (Boolean) -> Unit, label: String, modifier: Modifi
 @Composable
 private fun TaskFilterChipPreview() {
     PreferencesDataStoreTheme {
-        TaskFilterChip(onClicked = {}, label = "Filter")
+        TaskFilterChip(selected = true, onClicked = {}, label = "Filter")
     }
 }

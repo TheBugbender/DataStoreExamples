@@ -55,11 +55,11 @@ fun TaskCard(task: Task) {
             Icon(
                 painter = painterResource(R.drawable.calendar_month_24),
                 contentDescription = null,
-                tint = MaterialTheme.colorScheme.secondaryContainer
+                tint = MaterialTheme.colorScheme.outline
             )
             Text(
                 text = dateFormat.format(task.deadline),
-                color = MaterialTheme.colorScheme.secondaryContainer
+                color = MaterialTheme.colorScheme.outline
             )
         }
     }
