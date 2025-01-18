@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "PreferencesDataStore"
+rootProject.name = "DataStoreExamples"
 include(":app")
  

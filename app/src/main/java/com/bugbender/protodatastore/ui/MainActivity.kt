@@ -1,4 +1,4 @@
-package com.bugbender.preferencesdatastore.ui
+package com.bugbender.protodatastore.ui
 
 import android.content.Context
 import android.os.Bundle
@@ -13,11 +13,11 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.dataStore
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.bugbender.preferencesdatastore.data.TasksRepository
-import com.bugbender.preferencesdatastore.data.UserPreferencesRepository
-import com.bugbender.preferencesdatastore.data.UserPreferencesSerializer
-import com.bugbender.preferencesdatastore.proto.UserPreferences
-import com.bugbender.preferencesdatastore.ui.theme.PreferencesDataStoreTheme
+import com.bugbender.protodatastore.data.TasksRepository
+import com.bugbender.protodatastore.data.UserPreferencesRepository
+import com.bugbender.protodatastore.data.UserPreferencesSerializer
+import com.bugbender.protodatastore.proto.UserPreferences
+import com.bugbender.protodatastore.ui.theme.DataStoreTheme
 
 
 private const val DATA_STORE_FILE_NAME = "user_preferences.pb"
@@ -32,7 +32,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            PreferencesDataStoreTheme {
+            DataStoreTheme {
                 AppScreen()
             }
         }
@@ -63,7 +63,7 @@ fun AppScreen() {
 @Preview(showSystemUi = true)
 @Composable
 private fun AppScreenPreview() {
-    PreferencesDataStoreTheme {
+    DataStoreTheme {
         AppScreen()
     }
 }

@@ -1,11 +1,10 @@
-package com.bugbender.preferencesdatastore.ui.components
+package com.bugbender.protodatastore.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -18,19 +17,15 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.bugbender.preferencesdatastore.R
-import com.bugbender.preferencesdatastore.proto.UserPreferences.*
-import com.bugbender.preferencesdatastore.ui.theme.PreferencesDataStoreTheme
+import com.bugbender.protodatastore.R
+import com.bugbender.protodatastore.proto.UserPreferences.*
+import com.bugbender.protodatastore.ui.theme.DataStoreTheme
 
 @Composable
 fun AppBottomBar(
@@ -61,7 +56,7 @@ fun AppBottomBar(
 @Preview(showBackground = true)
 @Composable
 private fun AppBottomBarPreview() {
-    PreferencesDataStoreTheme {
+    DataStoreTheme {
         AppBottomBar(true, SortOrder.BY_PRIORITY, {}, {}, {})
     }
 }
@@ -87,7 +82,7 @@ fun ShowCompletedTasks(
 @Preview(showBackground = true)
 @Composable
 private fun ShowCompletedTasksPreview() {
-    PreferencesDataStoreTheme {
+    DataStoreTheme {
         ShowCompletedTasks(true, onShowCompletedTaskChange = {})
     }
 }
@@ -126,7 +121,7 @@ fun TaskFilters(
 @Preview(showBackground = true)
 @Composable
 private fun TaskFiltersPreview() {
-    PreferencesDataStoreTheme {
+    DataStoreTheme {
         TaskFilters(SortOrder.BY_PRIORITY, {}, {})
     }
 }
@@ -157,7 +152,7 @@ fun TaskFilterChip(
 @Preview(showBackground = true)
 @Composable
 private fun TaskFilterChipPreview() {
-    PreferencesDataStoreTheme {
+    DataStoreTheme {
         TaskFilterChip(selected = true, onClicked = {}, label = "Filter")
     }
 }

@@ -1,10 +1,9 @@
-package com.bugbender.preferencesdatastore.data
+package com.bugbender.protodatastore.data
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.core.IOException
-import com.bugbender.preferencesdatastore.proto.UserPreferences
-import com.bugbender.preferencesdatastore.proto.UserPreferences.*
-import com.bugbender.preferencesdatastore.proto.userPreferences
+import com.bugbender.protodatastore.proto.UserPreferences
+import com.bugbender.protodatastore.proto.UserPreferences.*
 import kotlinx.coroutines.flow.catch
 
 class UserPreferencesRepository(
@@ -14,7 +13,7 @@ class UserPreferencesRepository(
     val userPreferences = dataStore.data
         .catch { exception ->
             if (exception is IOException) {
-                emit(getDefaultInstance())
+                emit(UserPreferences.getDefaultInstance())
             } else {
                 throw exception
             }

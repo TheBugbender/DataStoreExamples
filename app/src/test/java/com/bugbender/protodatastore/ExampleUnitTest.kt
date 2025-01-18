@@ -1,4 +1,4 @@
-package com.bugbender.preferencesdatastore
+package com.bugbender.protodatastore
 
 import org.junit.Test
 

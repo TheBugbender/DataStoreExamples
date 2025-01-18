@@ -1,13 +1,13 @@
-package com.bugbender.preferencesdatastore.ui
+package com.bugbender.protodatastore.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.bugbender.preferencesdatastore.data.Task
-import com.bugbender.preferencesdatastore.data.TasksRepository
-import com.bugbender.preferencesdatastore.data.UserPreferencesRepository
-import com.bugbender.preferencesdatastore.proto.UserPreferences
-import com.bugbender.preferencesdatastore.proto.UserPreferences.SortOrder
+import com.bugbender.protodatastore.data.Task
+import com.bugbender.protodatastore.data.TasksRepository
+import com.bugbender.protodatastore.data.UserPreferencesRepository
+import com.bugbender.protodatastore.proto.UserPreferences
+import com.bugbender.protodatastore.proto.UserPreferences.SortOrder
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn

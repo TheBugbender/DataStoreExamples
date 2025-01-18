@@ -1,8 +1,8 @@
-package com.bugbender.preferencesdatastore.data
+package com.bugbender.protodatastore.data
 
 import androidx.datastore.core.CorruptionException
 import androidx.datastore.core.Serializer
-import com.bugbender.preferencesdatastore.proto.UserPreferences
+import com.bugbender.protodatastore.proto.UserPreferences
 import com.google.protobuf.InvalidProtocolBufferException
 import java.io.InputStream
 import java.io.OutputStream

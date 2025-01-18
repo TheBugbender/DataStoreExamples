@@ -9,11 +9,11 @@ plugins {
 }
 
 android {
-    namespace = "com.bugbender.preferencesdatastore"
+    namespace = "com.bugbender.protodatastore"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.bugbender.preferencesdatastore"
+        applicationId = "com.bugbender.protodatastore"
         minSdk = 29
         targetSdk = 35
         versionCode = 1

@@ -1,4 +1,4 @@
-package com.bugbender.preferencesdatastore.ui.theme
+package com.bugbender.protodatastore.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

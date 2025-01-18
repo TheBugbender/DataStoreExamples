@@ -1,4 +1,4 @@
-package com.bugbender.preferencesdatastore.data
+package com.bugbender.protodatastore.data
 
 import java.util.Date
 

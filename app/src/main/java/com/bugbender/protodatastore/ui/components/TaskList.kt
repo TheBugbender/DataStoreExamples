@@ -1,18 +1,16 @@
-package com.bugbender.preferencesdatastore.ui.components
+package com.bugbender.protodatastore.ui.components
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.bugbender.preferencesdatastore.data.Task
-import com.bugbender.preferencesdatastore.data.TaskPriority
-import com.bugbender.preferencesdatastore.ui.theme.PreferencesDataStoreTheme
-import kotlinx.coroutines.flow.toList
+import com.bugbender.protodatastore.data.Task
+import com.bugbender.protodatastore.data.TaskPriority
+import com.bugbender.protodatastore.ui.theme.DataStoreTheme
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -34,7 +32,7 @@ fun TaskList(tasks: List<Task>, modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 private fun TaskListPreview() {
-    PreferencesDataStoreTheme {
+    DataStoreTheme {
         val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.US)
 
         TaskList(

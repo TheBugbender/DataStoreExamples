@@ -1,4 +1,4 @@
-package com.bugbender.preferencesdatastore.ui
+package com.bugbender.protodatastore.ui
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -6,13 +6,13 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.bugbender.preferencesdatastore.data.Task
-import com.bugbender.preferencesdatastore.data.TaskPriority
-import com.bugbender.preferencesdatastore.proto.UserPreferences.*
-import com.bugbender.preferencesdatastore.ui.components.AppBottomBar
-import com.bugbender.preferencesdatastore.ui.components.AppTopBar
-import com.bugbender.preferencesdatastore.ui.components.TaskList
-import com.bugbender.preferencesdatastore.ui.theme.PreferencesDataStoreTheme
+import com.bugbender.protodatastore.data.Task
+import com.bugbender.protodatastore.data.TaskPriority
+import com.bugbender.protodatastore.proto.UserPreferences.*
+import com.bugbender.protodatastore.ui.components.AppBottomBar
+import com.bugbender.protodatastore.ui.components.AppTopBar
+import com.bugbender.protodatastore.ui.components.TaskList
+import com.bugbender.protodatastore.ui.theme.DataStoreTheme
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -50,7 +50,7 @@ fun AppContent(
 @Preview(showSystemUi = true)
 @Composable
 private fun AppContentPreview() {
-    PreferencesDataStoreTheme {
+    DataStoreTheme {
         val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.US)
 
         AppContent(
