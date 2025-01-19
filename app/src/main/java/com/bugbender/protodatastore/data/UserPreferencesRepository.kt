@@ -2,8 +2,7 @@ package com.bugbender.protodatastore.data
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.core.IOException
-import com.bugbender.protodatastore.proto.UserPreferences
-import com.bugbender.protodatastore.proto.UserPreferences.*
+
 import kotlinx.coroutines.flow.catch
 
 class UserPreferencesRepository(
@@ -13,7 +12,7 @@ class UserPreferencesRepository(
     val userPreferences = dataStore.data
         .catch { exception ->
             if (exception is IOException) {
-                emit(UserPreferences.getDefaultInstance())
+                emit(UserPreferences(showCompleted = false, sortOrder = SortOrder.NONE))
             } else {
                 throw exception
             }
@@ -21,9 +20,7 @@ class UserPreferencesRepository(
 
     suspend fun updateShowCompleted(showCompleted: Boolean) {
         dataStore.updateData { preferences ->
-            preferences.toBuilder()
-                .setShowCompleted(showCompleted)
-                .build()
+            preferences.copy(showCompleted = showCompleted)
         }
     }
 
@@ -44,9 +41,7 @@ class UserPreferencesRepository(
                         SortOrder.NONE
                     }
                 }
-            currentPreferences.toBuilder()
-                .setSortOrder(newSortOrder)
-                .build()
+            currentPreferences.copy(sortOrder = newSortOrder)
         }
     }
 
@@ -67,9 +62,8 @@ class UserPreferencesRepository(
                         SortOrder.NONE
                     }
                 }
-            currentPreferences.toBuilder()
-                .setSortOrder(newSortOrder)
-                .build()
+
+            currentPreferences.copy(sortOrder = newSortOrder)
         }
     }
 }

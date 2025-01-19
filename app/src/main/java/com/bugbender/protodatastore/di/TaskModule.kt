@@ -2,8 +2,8 @@ package com.bugbender.protodatastore.di
 
 import android.view.View
 import androidx.datastore.core.DataStore
+import com.bugbender.protodatastore.data.UserPreferences
 import com.bugbender.protodatastore.data.UserPreferencesRepository
-import com.bugbender.protodatastore.proto.UserPreferences
 import dagger.Binds
 import dagger.Module
 import dagger.Provides

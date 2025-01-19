@@ -5,8 +5,8 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.core.DataStoreFactory
 import androidx.datastore.dataStore
 import androidx.datastore.dataStoreFile
+import com.bugbender.protodatastore.data.UserPreferences
 import com.bugbender.protodatastore.data.UserPreferencesSerializer
-import com.bugbender.protodatastore.proto.UserPreferences
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -13,10 +13,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.dataStore
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.bugbender.protodatastore.data.TasksRepository
-import com.bugbender.protodatastore.data.UserPreferencesRepository
-import com.bugbender.protodatastore.data.UserPreferencesSerializer
-import com.bugbender.protodatastore.proto.UserPreferences
+
 import com.bugbender.protodatastore.ui.theme.DataStoreTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -35,9 +32,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun AppScreen() {
-    val context = LocalContext.current
     val viewModel: TasksViewModel = viewModel()
-
     val state by viewModel.screenStateFlow.collectAsStateWithLifecycle()
 
     AppContent(

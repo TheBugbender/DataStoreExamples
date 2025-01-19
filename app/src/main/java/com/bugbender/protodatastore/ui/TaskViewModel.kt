@@ -3,11 +3,12 @@ package com.bugbender.protodatastore.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.bugbender.protodatastore.data.SortOrder
 import com.bugbender.protodatastore.data.Task
 import com.bugbender.protodatastore.data.TasksRepository
+import com.bugbender.protodatastore.data.UserPreferences
 import com.bugbender.protodatastore.data.UserPreferencesRepository
-import com.bugbender.protodatastore.proto.UserPreferences
-import com.bugbender.protodatastore.proto.UserPreferences.SortOrder
+
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
@@ -70,7 +71,6 @@ class TasksViewModel @Inject constructor(
             SortOrder.BY_DEADLINE_AND_PRIORITY -> filteredTasks.sortedWith(
                 compareByDescending<Task> { it.deadline }.thenBy { it.priority }
             )
-
             else -> filteredTasks
 
         }

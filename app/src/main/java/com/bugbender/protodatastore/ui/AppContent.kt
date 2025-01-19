@@ -6,9 +6,9 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.bugbender.protodatastore.data.SortOrder
 import com.bugbender.protodatastore.data.Task
 import com.bugbender.protodatastore.data.TaskPriority
-import com.bugbender.protodatastore.proto.UserPreferences.*
 import com.bugbender.protodatastore.ui.components.AppBottomBar
 import com.bugbender.protodatastore.ui.components.AppTopBar
 import com.bugbender.protodatastore.ui.components.TaskList

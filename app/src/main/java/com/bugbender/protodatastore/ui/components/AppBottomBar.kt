@@ -24,7 +24,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.bugbender.protodatastore.R
-import com.bugbender.protodatastore.proto.UserPreferences.*
+import com.bugbender.protodatastore.data.SortOrder
 import com.bugbender.protodatastore.ui.theme.DataStoreTheme
 
 @Composable
