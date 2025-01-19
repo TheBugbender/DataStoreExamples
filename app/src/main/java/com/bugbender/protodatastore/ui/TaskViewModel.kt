@@ -8,16 +8,18 @@ import com.bugbender.protodatastore.data.TasksRepository
 import com.bugbender.protodatastore.data.UserPreferencesRepository
 import com.bugbender.protodatastore.proto.UserPreferences
 import com.bugbender.protodatastore.proto.UserPreferences.SortOrder
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class TasksViewModel(
+@HiltViewModel
+class TasksViewModel @Inject constructor(
     repository: TasksRepository,
     private val userPreferencesRepository: UserPreferencesRepository
 ) : ViewModel() {
-
 
     val screenStateFlow = combine(
         repository.tasks,
@@ -68,6 +70,7 @@ class TasksViewModel(
             SortOrder.BY_DEADLINE_AND_PRIORITY -> filteredTasks.sortedWith(
                 compareByDescending<Task> { it.deadline }.thenBy { it.priority }
             )
+
             else -> filteredTasks
 
         }

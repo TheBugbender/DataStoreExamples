@@ -18,15 +18,9 @@ import com.bugbender.protodatastore.data.UserPreferencesRepository
 import com.bugbender.protodatastore.data.UserPreferencesSerializer
 import com.bugbender.protodatastore.proto.UserPreferences
 import com.bugbender.protodatastore.ui.theme.DataStoreTheme
+import dagger.hilt.android.AndroidEntryPoint
 
-
-private const val DATA_STORE_FILE_NAME = "user_preferences.pb"
-
-private val Context.userPreferencesStore: DataStore<UserPreferences> by dataStore(
-    fileName = DATA_STORE_FILE_NAME,
-    serializer = UserPreferencesSerializer
-)
-
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,14 +36,8 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun AppScreen() {
     val context = LocalContext.current
-    val viewModel: TasksViewModel = viewModel(
-        factory = TasksViewModel.Factory(
-            taskRepository = TasksRepository,
-            userPreferencesRepository = UserPreferencesRepository(
-                dataStore = context.userPreferencesStore
-            )
-        )
-    )
+    val viewModel: TasksViewModel = viewModel()
+
     val state by viewModel.screenStateFlow.collectAsStateWithLifecycle()
 
     AppContent(
