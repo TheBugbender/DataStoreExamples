@@ -19,10 +19,12 @@ Examples of using Datastore on Jetpack Compose (code mostly from codelabs but re
 #### libs.versions.toml:
 [versions]
 
+    datastore = "1.1.2"
     serializationJson = "1.7.3"
 
 [libraries]
 
+    androidx-datastore = { module = "androidx.datastore:datastore", version.ref = "datastore" }
     kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serializationJson" }
 
 [plugins]
